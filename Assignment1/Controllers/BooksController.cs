@@ -20,8 +20,8 @@ namespace Assignment1.Controllers
     public class BooksController : Controller
     {
         private readonly UserContext _context;
-        private readonly int _recordsPerPage = 21;
-        private readonly int _recordsPersPage = 21;
+        private readonly int _recordsPerPage = 24;
+        private readonly int _recordsPersPage = 24;
         private readonly UserManager<Assignment1User> _userManager;
         private readonly IEmailSender _emailSender;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -57,13 +57,13 @@ namespace Assignment1.Controllers
             }
 
             int numberOfRecords = await books.CountAsync();     //Count SQL
-            int numberOfPages = (int)Math.Ceiling((double)numberOfRecords / 10);
+            int numberOfPages = (int)Math.Ceiling((double)numberOfRecords / _recordsPerPage);
             ViewBag.numberOfPages = numberOfPages;
             ViewBag.currentPage = id;
             ViewData["CurrentFilter"] = searchString;
             List<Book> booksList = await books
-                .Skip(id * 10)  //Offset SQL
-                .Take(10)       //Top SQL
+                .Skip(id * _recordsPerPage)  //Offset SQL
+                .Take(_recordsPerPage)       //Top SQL
                 .ToListAsync();
             return View(booksList);
         }
@@ -81,13 +81,13 @@ namespace Assignment1.Controllers
 
 
             int numberOfRecords = await books.CountAsync();     //Count SQL
-            int numberOfPages = (int)Math.Ceiling((double)numberOfRecords / 10);
+            int numberOfPages = (int)Math.Ceiling((double)numberOfRecords / _recordsPerPage);
             ViewBag.numberOfPages = numberOfPages;
             ViewBag.currentPage = id;
             ViewData["CurrentFilter"] = searchString;
             List<Book> booksList = await books
-                .Skip(id * 10)  //Offset SQL
-                .Take(10)       //Top SQL
+                .Skip(id * _recordsPerPage)  //Offset SQL
+                .Take(_recordsPerPage)       //Top SQL
                 .ToListAsync();
             return View(booksList);
         }
