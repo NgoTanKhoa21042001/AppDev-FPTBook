@@ -57,13 +57,13 @@ namespace Assignment1.Controllers
             }
 
             int numberOfRecords = await books.CountAsync();     //Count SQL
-            int numberOfPages = (int)Math.Ceiling((double)numberOfRecords / _recordsPerPage);
+            int numberOfPages = (int)Math.Ceiling((double)numberOfRecords / 10);
             ViewBag.numberOfPages = numberOfPages;
             ViewBag.currentPage = id;
             ViewData["CurrentFilter"] = searchString;
             List<Book> booksList = await books
-                .Skip(id * _recordsPerPage)  //Offset SQL
-                .Take(_recordsPerPage)       //Top SQL
+                .Skip(id * 10)  //Offset SQL
+                .Take(10)       //Top SQL
                 .ToListAsync();
             return View(booksList);
         }
