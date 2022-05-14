@@ -20,20 +20,6 @@ namespace Assignment1.Controllers
             _userManager = userManager;
         }
 
-        [Authorize(Roles = "Customer")]
-        public IActionResult ForCustomerOnly()
-        {
-            ViewBag.message = "This is for Customer only! Hi " + _userManager.GetUserName(HttpContext.User);
-            return View("Views/Home/Index.cshtml");
-        }
-
-        [Authorize(Roles = "Seller")]
-        public IActionResult ForSellerOnly()
-        {
-            ViewBag.message = "This is for Store Owner only!";
-            return View("Views/Home/Index.cshtml");
-        }
-
         public IActionResult Index()
         {
             var obj = _context.Book.ToList();   
