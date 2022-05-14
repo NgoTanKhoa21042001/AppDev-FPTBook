@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Assignment1.Models.Order>
+
+@{
+    ViewData["Title"] = "Index";
+    //Truyền dữ liệu 
+    List<OrderDetail> orderDetails = ViewBag.OrderId;
+}
+
+<h1>Index</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+                Order Id
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td> 
+              
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td> 
+                
+           @* <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td> *@
+                
+            <td>
+                <a asp-controller="OrderDetails" asp-action="OrderManage" asp-route-id="@item.Id" class="btn btn-primary">Details</a> |
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

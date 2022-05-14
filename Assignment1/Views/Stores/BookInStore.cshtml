@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Assignment1.Models.Book>
+<p>
+    <a asp-controller="Books" asp-action="Create">Create New</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.ImgUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pages)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desc)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Store)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.ImgUrl) "/>
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pages)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desc)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Store.Id)
+                </td>
+                <td>
+                    <a asp-controller="Books" asp-action="Edit" asp-route-id="@item.Isbn" class="btn btn-primary">Edit</a>              
+                    <a asp-controller="Books" asp-action="Delete" asp-route-id="@item.Isbn" class="btn btn-danger">Delete</a>
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+</table>

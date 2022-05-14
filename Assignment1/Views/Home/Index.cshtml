@@ -1,0 +1,71 @@
+﻿  @model List<Assignment1.Models.Book>
+
+  @{
+      ViewData["Title"] = "Index";
+  }
+
+  <h1>List</h1>
+
+  <div class="container">
+       <form asp-action = "List" method = "get">
+           <div class="form-actions no-color">
+        <p>
+            Find by name: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+            <input type="submit" value="Search" class="btn btn-primary"  /> |
+            <a asp-action="Index">Back to Full List  </a>
+        </p>
+       </form>
+    </div>
+      <div class="row">
+          @for (var i = 0; i < @Model.Count; i++)
+          {
+              <div class="col-md-4 col-6">
+                  <div class="card" style="width: 18rem;">
+                      @* @{
+                    if(Model[i].ImgUrl != null)
+                    {*@
+                        <td>
+                    <img src="@Html.DisplayFor(modelItem => Model[i].ImgUrl) "/> 
+                     
+                   
+                </td> 
+                    
+                
+                      <div class="card-body">
+                          <h5 class="card-title">@Model[i].Title</h5>
+                          <a asp-controller="Books" asp-action="Details" class="btn btn-primary" asp-route-id="@Model[i].Isbn">Details</a> |
+                          <a asp-controller="Books" asp-action="AddToCart" asp-route-isbn="@Model[i].Isbn" class="btn btn-primary">Add to cart</a>
+                      </div>
+
+                  </div>
+              </div>
+          }
+      </div>
+  </div>
+  @*<div style="display:flex;text-align:center;justify-content:center">
+      <nav aria-label="Page navigation example">
+          <ul class="pagination">
+              @for (var i = 0; i < @ViewBag.numberOfPages; i++)
+              {
+                  var style = (ViewBag.currentPage == @i) ? "active" : "";
+                  <li class="page-item @style">
+                      <a class="page-link" asp-route-id="@i" asp-route-searchString ="@ViewData["CurrentFilter"]">@(i+1)</a>
+                  </li>
+              }
+          </ul>
+      </nav>
+  </div>*@
+  <div style="display:flex;text-align:center;justify-content:center">
+      <nav aria-label="Page navigation example">
+          <ul class="pagination">
+              @for (var i = 0; i < @ViewBag.numberOfPages; i++)
+              {
+                  var style = (ViewBag.currentPage == @i) ? "active" : "";
+                  <li class="page-item @style">
+                      <a class="page-link" asp-route-id="@i"
+                      asp-route-searchString="@ViewData["CurrentFilter"]">@(i+1)</a>
+                  </li>
+              }
+          </ul>
+      </nav>
+  </div>
